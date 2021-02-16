@@ -10,6 +10,7 @@ import InputBase from '@material-ui/core/InputBase';
 import Avatar from '@material-ui/core/Avatar';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import IconButton from '@material-ui/core/IconButton';
+import { useRouter } from 'next/router'
 import Amplify, { Auth } from 'aws-amplify';
 
 const useStyles = makeStyles((theme) => ({
@@ -76,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
 
 const NavbarComponent = () => {
     const classes = useStyles();
+    const router = useRouter()
     const [user, setUser] = useState(null);
     useEffect(() => {
         checkCurrentUser()
@@ -113,7 +115,9 @@ const NavbarComponent = () => {
                         </div>
 
                         {
-                            !user ? <Button color="inherit">Login</Button> : 
+                            !user ? <Button color="inherit" onClick={() => router.push('/login')}>
+                                    Login
+                                </Button> : 
                             (
                                 <>
                                     <Button variant="contained" color="primary" style={{ textTransform: 'none' }}>

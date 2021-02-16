@@ -1,6 +1,6 @@
 {
   "auth": {
-    "devtestfdac655e": {
+    "amplifiedblogc762f9c9": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
