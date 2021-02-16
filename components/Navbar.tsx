@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { makeStyles, fade } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,6 +10,7 @@ import InputBase from '@material-ui/core/InputBase';
 import Avatar from '@material-ui/core/Avatar';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import IconButton from '@material-ui/core/IconButton';
+import Amplify, { Auth } from 'aws-amplify';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -75,7 +76,19 @@ const useStyles = makeStyles((theme) => ({
 
 const NavbarComponent = () => {
     const classes = useStyles();
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(null);
+    useEffect(() => {
+        checkCurrentUser()
+    }, [])
+
+    const checkCurrentUser = async () => {
+        try {
+            const user = await Auth.currentAuthenticatedUser();
+            console.log('user', user)
+        } catch (error) {
+            console.log('--->', error)
+        }
+    }
 
     return (
         <div className={classes.root}>
